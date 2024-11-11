@@ -1,97 +1,38 @@
-install.packages("Seurat")
-install.packages("anndata")
-install.packages("Rtools")
+###This R script is intended for converting CellxGene h5ad files to the Seurat format, then converting them back to h5ad format for spatial analysis.
+### It is modelled after the use case of analyzing the Zhang et al MERFISH mouse brain datasets, but should work for any CellxGene datasets. Edit variable names, number of read_h5ad() uses, etc as needed.
 
+#installing needed packages
+install.packages("Seurat")
+install.packages("Rtools")
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
-
 devtools::install_github("scverse/anndataR", dependencies = TRUE)
-
 install.packages("devtools")
 
+#load packages
 library(Seurat)
 library(dplyr)
 library(tidyverse)
 library(ggplot2)
-library(anndata)
-library(anndataR, include.only = "to_seurat")
+library(anndataR)
 
-help(package = "anndataR")
-install.packages("Seurat", dependencies=TRUE, INSTALL_opts = c('--no-lock'))
-devtools::install_github("scverse/anndataR")
+#replace h5ad_path with path to your cellxgene h5ad of interest 
+adata <- read_h5ad(h5ad_path)
+bdata <- read_h5ad(h5ad_path)
 
-ad <- AnnData(
-  X = matrix(1:6, nrow= 2),
-  obs = data.frame(group = c("a","b"),row.names = c("s1","s2")),
-  var = data.frame(type = c(1L,2L,3L), row.names = c("var1","var2","var3")),
-  layers = list(
-    spliced = matrix(4:9, nrow=2),
-    unspliced = matrix(8:13, nrow = 2)
-  )
-)
+#converting anndata h5ad to seurat object. takes a long time especially for large objects.
 
-view <- ad[-1,]
-ad$X
-view$X
+###this script will assume you are using the Zhuang et al MERFISH dataset.
+###variable names "brain1", "brain2" etc can be edited if you are not using this dataset or just want to use a different name
 
-
-view2<-adata[adata$obs$BICCN_subclass_label=="Astrocytes"]
-view2$obs
-rownames(view2$var) <- view2$var$feature_name
-
-col <- colnames(adata$obs)
-col["cell_type", drop = F]
-view3 <- adata[as.vector(adata$obs=="cell_type")]
-view3 <- adata[adata$X$obs["cell_type"]]
-
-view3
-
-view4 <- adata$obs["fov_x"]
-
-select(adata, )
-
-
-invert(adata$obs$fov_y) <- NULL
-bdata <- adataadta
-
-bdata <- adata[adata$obs[c('fov_y', 'volume')]]
-
-bdata <- adata %>% select(obs == "fov_y")
-
-adata[[colnames(adata$obs) == c("cell_type","organism")]]
-
-view3 <- adata[adata$obs[, c("organism"), drop = FALSE]]
-view3$X
-
-BICCN_subclass_label
-
-colnames(adata$obs)
-
-#converting h5ad to rds, takes forever
-###############################################################
-start.time <- Sys.time()
-adata <- read_h5ad("mouse_motor_cortex.h5ad")
-end.time <- Sys.time()
-time.taken <- end.time - start.time
-print("Done with read_h5ad")
-time.taken
-
-
-xyz<-view2$X
-xyz$obs["cell_type"]
-abc<-adata$layers["counts"]
-
-adata_small <- adata[adata$obs_keys()]
-
-to_seurat() <- anndataR::to_seurat()
-
-adata$to_Seurat()
 start.time <- Sys.time()
 brain1 <- adata$to_Seurat()
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 print("Done with to_seurat()")
 time.taken
+#deletes anndata object to save memory
+rm(adata)
 
 start.time <- Sys.time()
 bdata <- read_h5ad("brain2_edited_genenames.h5ad", to = "InMemoryAnnData")
@@ -99,6 +40,7 @@ brain2 <- bdata$to_Seurat()
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 time.taken
+rm(bdata)
 
 ###############################################################
 
