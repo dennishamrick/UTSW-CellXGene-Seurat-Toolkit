@@ -70,3 +70,14 @@ b2SUBSET
 #removes brain2 from environment
 rm(brain2)
 
+#perform analysis, cluster seurat object with created objects, merge if you want
+
+#begin below section with clustered seurat object
+
+#makes cellxgene-compatible CSV
+tibble(index = colnames(SEURAT_OBJ), clusterID = Idents(SEURAT_OBJ)) %>%
+  write_csv(file = sprintf("cluster_mappings_%s.csv", Sys.Date()))
+
+#then in cellxgene run 
+#cellxgene launch YOUR_CELLXGENE_FILE.h5ad --max-category-items 500 --annotations-file cluster_mappings_XXXX-XX-XX.csv
+
