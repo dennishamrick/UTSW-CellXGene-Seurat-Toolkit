@@ -1,4 +1,4 @@
-# cellxgene-seurat-interoperability
+# UTSW CellXGene Seurat Toolkit
 
 This github repository is intended to be used as a pipeline to analyze spatial/single-cell datasets from the website CellXGene using the R framework Seurat. You can download a .zip file with all of the scripts and this README file by pressing the green < > Code button and selecting 'Download Zip' from the menu that appears.
 
