@@ -3,7 +3,9 @@
 
 #installing needed packages
 install.packages("Seurat")
+install.packages("tidyverse")
 install.packages("Rtools")
+install.packages("ggplot2")
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 devtools::install_github("scverse/anndataR", dependencies = TRUE)
@@ -25,8 +27,11 @@ bdata <- read_h5ad(h5ad_path)
 ###this script will assume you are using the Zhuang et al MERFISH dataset.
 ###variable names "brain1", "brain2" etc can be edited if you are not using this dataset or just want to use a different name
 
+#starts a timer
 start.time <- Sys.time()
+#converts h5ad to seurat
 brain1 <- adata$to_Seurat()
+#ends timer and displays length of process
 end.time <- Sys.time()
 time.taken <- end.time - start.time
 print("Done with to_seurat()")
@@ -34,8 +39,10 @@ time.taken
 #deletes anndata object to save memory
 rm(adata)
 
+#same as above, just for another object.
+# If your computer has less than 16-32 gigabytes of RAM or is an older model, you 
+# may want to run each object separately to avoid crashing R or performing very slow.
 start.time <- Sys.time()
-bdata <- read_h5ad("brain2_edited_genenames.h5ad", to = "InMemoryAnnData")
 brain2 <- bdata$to_Seurat()
 end.time <- Sys.time()
 time.taken <- end.time - start.time
@@ -43,9 +50,12 @@ time.taken
 rm(bdata)
 
 ###############################################################
+### At this point you will have your seurat objects brain1 and brain2.
+
 
 #calls the metadata of the object
 brain1_metadata <- brain1[[]]
+
 colnames(brain1_metadata)
 
 #subsetting object based on object
