@@ -14,27 +14,42 @@ After downloading all of these programs, download the needed packages.
 
 ## 2. Create Anaconda environment with python packages/
 Create a conda environment to use CellXGene in:
+
 `conda create --yes -n cellxgene python=3.12`
+
 Activate the environment (do this every time you use cellxgene):
+
 `conda activate cellxgene`
+
 Install needed packages:
+
 `pip install cellxgene scanpy anndata`
 
 ## 3. Download R packages.
 Download devtools, Seurat, tidyverse, Rtools, ggplot2, BiocManager, and anndataR. To download all at once:
+
 `install.packages("devtools")
+
 install.packages("Seurat")
+
 install.packages("tidyverse")
+
 install.packages("Rtools")
+
 install.packages("ggplot2")
+
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
+
 devtools::install_github("scverse/anndataR", dependencies = TRUE)`
 
 ## 4. Download the CellXGene file of interest.
 [CellXGene](https://cellxgene.cziscience.com/)
+
 You can also, if using the Zhang et al. mouse brain datasets, download my pre-processed versions of two coronal sections from [LINK TBD]().
+
 It is strongly encouraged to create a folder to store each file of interest in. This is because CellXGene creates annotation csv files, and it will help to stay organized if each file has a folder to catch these .csv files.
+
 ### 4b. Convert feature IDs from ENSMBL IDs to gene symbols.
 By default, CellXGene datasets use ENSEMBL IDs for feature IDs. These are useful but non-human readable. They can be converted to gene symbols with the script `edit_gene_names.py`.
 Activate your conda environment:
