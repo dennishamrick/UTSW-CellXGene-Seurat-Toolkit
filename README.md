@@ -52,28 +52,46 @@ It is strongly encouraged to create a folder to store each file of interest in. 
 
 ### 4b. Convert feature IDs from ENSMBL IDs to gene symbols.
 By default, CellXGene datasets use ENSEMBL IDs for feature IDs. These are useful but non-human readable. They can be converted to gene symbols with the script `edit_gene_names.py`.
+
 Activate your conda environment:
+
 `conda activate cellxgene`
+
 Change directory to whereever you have the script downloaded:
+
 `cd Downloads/UTSW-CellXGene-Seurat-Toolkit`
+
 Run the script
+
 `python3 edit_gene_names.py`
+
 The script will ask for an h5ad file, input the exact path of the h5ad file with its name.
+
 `Enter your .h5ad path: /Documents/myfile.h5ad`
-It will edit the gene names and output a file
+
+It will edit the gene names and output a file:
+
 `myfile_updated_genenames.h5ad`.
 
 # Step By Step - Analysis
 
 ## 1. Open your file in cellxgene and subset your group of interest.
 Change directory to whereever you have your h5ad file stored.
+
 `cd Downloads/MyCellXGeneDatasetFolder`
+
 Activate your conda environment:
+
 `conda activate cellxgene`
+
 Launch your file:
+
 `cellxgene launch myfile.h5ad`
+
 If you have performance issues, you can use
+
 `cellxgene launch myfile.h5ad --max-category-items 500`
+
 You can subset based on gene expression, anatomical location, annotated cell types, or some combination of variables.
 [CellXGene's documentation](https://cellxgene.cziscience.com/docs/01__CellxGene) is very useful and will be helpful in this step.
 ## 2. Merge your annotations into the h5ad file.
