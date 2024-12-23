@@ -10,6 +10,8 @@ This github repository is intended to be used as a pipeline to analyze spatial/s
 [R](https://cran.rstudio.com/)
 [RStudio](https://posit.co/download/rstudio-desktop/)
 
+You will also need a browser to use CellXGene's interface. Firefox, Google Chrome, Microsoft Edge, or Safari should all work. If you are running a lower-spec computer, Google Chrome is not recommended as it will hog memory.
+
 After downloading all of these programs, download the needed packages.
 
 ## 2. Create Anaconda environment with python packages/
@@ -88,6 +90,8 @@ Launch your file:
 
 `cellxgene launch myfile.h5ad`
 
+CellXGene will print a link similar to `http://localhost:5005/`. Open it in your browser. If you encounter issues using it in Google Chrome, try Firefox on Windows/Linux or Safari on Mac.
+
 If you have performance issues, you can use
 
 `cellxgene launch myfile.h5ad --max-category-items 500`
@@ -96,13 +100,22 @@ You can subset based on gene expression, anatomical location, annotated cell typ
 [CellXGene's documentation](https://cellxgene.cziscience.com/docs/01__CellxGene) is very useful and will be helpful in this step.
 ## 2. Merge your annotations into the h5ad file.
 CellXGene will create an annotation file in .csv format with the categories you've created. You need to merge this annotation into the .h5ad file to port it into R. This can be done with `merge_annotations.py`. 
+
 Activate your conda environment:
+
 `conda activate cellxgene`
+
 Change directory to whereever you have the script downloaded:
+
 `cd Downloads/UTSW-CellXGene-Seurat-Toolkit`
+
 Run the script
+
 `python3 merge_annotations.py`
-The script will ask for the path to an h5ad file and ask for the path to its .csv annotation file. It will merge them together, and then ask if you want a compressed or non-compressed output .h5ad file. Compressed files (gzip format) will take up much less space but will be slower to load. The output file will be created as `myfile_annotated.h5ad`.
+
+The script will ask for the path to an h5ad file and ask for the path to its .csv annotation file. It will merge them together, and then ask if you want a compressed or non-compressed output .h5ad file. Compressed files (gzip format) will take up much less space but will be slower to load. The output file will be created as 
+
+`myfile_annotated.h5ad`.
 
 ## 3. Using generic_cellxgene.R
 Open generic_cellxgene.R. It contains needed functions and instructions to import your .h5ad file, convert it into a Seurat object, and subset it based on your selections.
@@ -113,13 +126,16 @@ https://satijalab.org/seurat/articles/pbmc3k_tutorial.html
 
 ## 5. Output your cluster IDs as a .csv.
 The needed function is at the bottom of generic_cellxgene.R:
+
 `tibble(index = colnames(SEURAT_OBJ), clusterID = Idents(SEURAT_OBJ)) %>%
   write_csv(file = sprintf("cluster_mappings_%s.csv", Sys.Date()))`
+
 The file will be outputted to your working directory with today's date as 
 `cluster_mappings_XXXX-XX-XX.csv`.
 
 ## 6. Visualize your clusters in CellXGene.
 Move your cluster_mappings.csv file into the same directory as the h5ad file they came from. Activate your cellxgene conda environment. Run the following command:
+
 `cellxgene launch YOUR_CELLXGENE_FILE.h5ad --max-category-items 500 --annotations-file cluster_mappings_XXXX-XX-XX.csv`
 
 
