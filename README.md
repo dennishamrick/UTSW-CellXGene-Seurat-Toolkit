@@ -4,6 +4,8 @@ This github repository is intended to be used as a pipeline to analyze spatial/s
 
 # Step By Step - Preparation:
 
+It is recommended to run this workflow on a computer with at least 16 GB of RAM. You may be able to use a computer with 8 GB of RAM but performance will be slower if it works at all. All of these programs should work on Windows, Linux, or Mac OS. The instructions have been written with Linux or Mac's terminal in mind, but they should be transferrable to Windows' command line.
+
 ## 1. Download needed programs.
 
 [Anaconda Distribution](https://www.anaconda.com/download)
@@ -15,7 +17,7 @@ You will also need a browser to use CellXGene's interface. Firefox, Google Chrom
 After downloading all of these programs, download the needed packages.
 
 ## 2. Create Anaconda environment with python packages/
-Create a conda environment to use CellXGene in:
+Open terminal. Create a conda environment to use CellXGene in:
 
 `conda create --yes -n cellxgene python=3.12`
 
