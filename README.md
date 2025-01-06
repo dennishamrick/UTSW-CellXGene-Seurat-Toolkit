@@ -34,7 +34,8 @@ Install needed packages:
 ## 3. Download R packages.
 Download devtools, Seurat, tidyverse, Rtools, ggplot2, BiocManager, and anndataR. To download all at once:
 
-``install.packages("devtools")
+```
+install.packages("devtools")
 
 install.packages("Seurat")
 
@@ -47,12 +48,13 @@ install.packages("ggplot2")
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
-devtools::install_github("scverse/anndataR", dependencies = TRUE)``
+devtools::install_github("scverse/anndataR", dependencies = TRUE)
+```
 
 ## 4. Download the CellXGene file of interest.
 [CellXGene](https://cellxgene.cziscience.com/)
 
-You can also, if using the Zhang et al. mouse brain datasets, download my pre-processed versions of two coronal sections from [LINK TBD]().
+You can also, if using the Zhang et al. mouse brain datasets, download our pre-processed versions of two coronal datasets from [LINK TBD]().
 
 It is strongly encouraged to create a folder to store each file of interest in. This is because CellXGene creates annotation csv files, and it will help to stay organized if each file has a folder to catch these .csv files.
 
@@ -125,7 +127,7 @@ The script will ask for the path to an h5ad file and ask for the path to its .cs
 Open generic_cellxgene.R. It contains needed functions and instructions to import your .h5ad file, convert it into a Seurat object, and subset it based on your selections.
 
 ## 4. Perform analysis with Seurat.
-Your object is now a standard seurat object and can be analyzed using that package. An example tutorial:
+Your object is now a standard Seurat object and can be analyzed using that package. An example tutorial:
 https://satijalab.org/seurat/articles/pbmc3k_tutorial.html
 
 ## 5. Output your cluster IDs as a .csv.
