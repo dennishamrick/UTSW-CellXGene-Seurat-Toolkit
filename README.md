@@ -9,7 +9,9 @@ It is recommended to run this workflow on a computer with at least 16 GB of RAM.
 ## 1. Download needed programs.
 
 [Anaconda Distribution](https://www.anaconda.com/download)
+
 [R](https://cran.rstudio.com/)
+
 [RStudio](https://posit.co/download/rstudio-desktop/)
 
 You will also need a browser to use CellXGene's interface. Firefox, Google Chrome, Microsoft Edge, or Safari should all work. If you are running a lower-spec computer, Google Chrome is not recommended as it will hog memory.
