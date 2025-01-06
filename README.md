@@ -34,7 +34,7 @@ Install needed packages:
 ## 3. Download R packages.
 Download devtools, Seurat, tidyverse, Rtools, ggplot2, BiocManager, and anndataR. To download all at once:
 
-`install.packages("devtools")
+``install.packages("devtools")
 
 install.packages("Seurat")
 
@@ -47,7 +47,7 @@ install.packages("ggplot2")
 if (!require("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
-devtools::install_github("scverse/anndataR", dependencies = TRUE)`
+devtools::install_github("scverse/anndataR", dependencies = TRUE)``
 
 ## 4. Download the CellXGene file of interest.
 [CellXGene](https://cellxgene.cziscience.com/)
