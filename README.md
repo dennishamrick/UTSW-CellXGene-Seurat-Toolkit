@@ -102,6 +102,8 @@ If you have performance issues, you can use
 
 `cellxgene launch myfile.h5ad --max-category-items 500`
 
+As well, try to limit programs running in the background that take up memory/processing power(Microsoft Teams, unrelated web browsers/tabs, etc).
+
 You can subset based on gene expression, anatomical location, annotated cell types, or some combination of variables.
 [CellXGene's documentation](https://cellxgene.cziscience.com/docs/01__CellxGene) is very useful and will be helpful in this step.
 ## 2. Merge your annotations into the h5ad file.
