@@ -24,7 +24,7 @@ while True:
 
 basename = Path(filename).stem
 print("Reading .h5ad... ")
-new1 = sc.read(filename)
+update_names= sc.read(filename)
 print(".h5ad read successfully.")
 print("Updating gene names...")
 gene_name = update_names.var_vector('gene_name')
@@ -32,5 +32,5 @@ update_names.var_names = update_names.var["gene_name"].copy()
 update_names.var.index.name = None 
 update_names.obs.index.name = None 
 print("Done! Writing h5ad...")
-update_names.write_h5ad(basename + "_updated_genenames.h5ad")
+update_names.write_h5ad(basename + "_updated_genenames.h5ad", compression = "gzip")
 print("h5ad written to " + basename + "_updated_genenames.h5ad.")
